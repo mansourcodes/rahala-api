@@ -13,10 +13,14 @@ class TripController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //var_dump($request->get('fields'));
         //
-        $trips = Trip::all();
+        $trips = Trip::all()
+            ->where('client.id','=','1')
+            ->sortByDesc($request->get('sort','id'))
+        ;
 
         return TripResource::collection($trips);
     }
@@ -51,7 +55,7 @@ class TripController extends Controller
     public function show($id)
     {
         //
-        return $trip = Trip::findOrgitFail($id);
+        return $trip = Trip::findOrFail($id);
         return TripResource::collection([$trip]);
     }
 
