@@ -2063,7 +2063,7 @@ __webpack_require__.r(__webpack_exports__);
     triggerTransitionEnd: function triggerTransitionEnd(element) {
       $(element).trigger(TRANSITION_END);
     },
-    // TODO: Remove in v5
+    //  Remove in v5
     supportsTransitionEnd: function supportsTransitionEnd() {
       return Boolean(TRANSITION_END);
     },

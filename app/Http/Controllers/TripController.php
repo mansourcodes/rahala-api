@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\trips;
+use App\Http\Resources\TripResource;
+use App\Trip;
 use Illuminate\Http\Request;
 
-class TripsController extends Controller
+class TripController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +16,9 @@ class TripsController extends Controller
     public function index()
     {
         //
+        $trips = Trip::all();
+
+        return TripResource::collection($trips);
     }
 
     /**
@@ -41,21 +45,23 @@ class TripsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\trips  $trips
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(trips $trips)
+    public function show($id)
     {
         //
+        return $trip = Trip::findOrgitFail($id);
+        return TripResource::collection([$trip]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\trips  $trips
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(trips $trips)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +70,10 @@ class TripsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\trips  $trips
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, trips $trips)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +81,10 @@ class TripsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\trips  $trips
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(trips $trips)
+    public function destroy($id)
     {
         //
     }

@@ -4,12 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Clients extends Model
+class Client extends Model
 {
-    //
-
     public function trips()
     {
-        return $this->hasMany('App\Trips');
+        return $this->hasMany('App\Trip');
     }
 }

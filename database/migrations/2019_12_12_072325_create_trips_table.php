@@ -19,7 +19,7 @@ class CreateTripsTable extends Migration
 
             $table->string('public_name', 100);
             $table->text('desc');
-            $table->json('trip_path');
+            $table->text('trip_path');
             $table->string('code', 50);
 
             $table->string('travel_by', 50);
@@ -49,7 +49,7 @@ class CreateTripsTable extends Migration
             $table->integer('teen_start_age');
             $table->integer('adult_start_age');
 
-            $table->json('ex_custom_things');
+            $table->text('ex_custom_things');
             $table->date('created_date');
         });
     }
