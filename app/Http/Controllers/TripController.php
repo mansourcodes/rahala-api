@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TripResource;
+use App\Http\Resources\TripResourceCollection;
 use App\Trip;
 use Illuminate\Http\Request;
 
@@ -15,14 +16,12 @@ class TripController extends Controller
      */
     public function index(Request $request)
     {
-        //var_dump($request->get('fields'));
-        //
-        $trips = Trip::all()
-            ->where('client.id','=','1')
-            ->sortByDesc($request->get('sort','id'))
+        $trips = Trip::paginate()
+        //->sortByDesc($request->get('sort','id'))
         ;
 
-        return TripResource::collection($trips);
+
+        return new TripResourceCollection($trips);
     }
 
     /**
@@ -54,9 +53,8 @@ class TripController extends Controller
      */
     public function show($id)
     {
-        //
-        return $trip = Trip::findOrFail($id);
-        return TripResource::collection([$trip]);
+        $trip = Trip::findOrFail($id);
+        return new TripResource($trip);
     }
 
     /**

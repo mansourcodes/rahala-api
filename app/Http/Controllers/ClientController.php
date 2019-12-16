@@ -13,12 +13,12 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $clients = Client::all();
-
-        return ClientResource::collection($clients);
+        $clients = Client::paginate()
+        //    ->sortByDesc($request->get('sort','id'))
+        ;
+        return new ClientResource($clients);
     }
 
     /**
@@ -50,7 +50,8 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        return new ClientResource($client);
     }
 
     /**
