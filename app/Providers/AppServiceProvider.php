@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Resources\TripResource;
+use Laravel\Passport\Http\Controllers\AccessTokenController;
 
 
 class AppServiceProvider extends ServiceProvider
