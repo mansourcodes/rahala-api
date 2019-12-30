@@ -20,7 +20,8 @@ $factory->define(Trip::class, function (Faker $faker) {
 
     return [
         'client_id' => rand(1,10),
-        'public_name' => $faker->sentence(7). $faker->date('d/m/Y'),
+        'name' => $faker->sentence(7). $faker->date('d/m/Y'),
+        'cities' => $faker->city.','.$faker->city,
         'desc' => $faker->paragraph,
 
         'trip_path' => '{}',

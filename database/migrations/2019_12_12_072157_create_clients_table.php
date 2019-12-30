@@ -14,7 +14,7 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->timestamps();
 
 
@@ -23,7 +23,7 @@ class CreateClientsTable extends Migration
             $table->mediumText('logo_img');
             $table->bigInteger('contact_wp_1');
             $table->bigInteger('contact_wp_2');
-            $table->geometry('locations');
+            $table->string('locations',100);
         });
     }
 

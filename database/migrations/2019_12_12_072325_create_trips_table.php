@@ -17,7 +17,10 @@ class CreateTripsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->string('public_name', 100);
+            $table->integer('client_id')->unsigned();
+
+            $table->string('name', 100);
+            $table->string('cities', 200);
             $table->text('desc');
             $table->text('trip_path');
             $table->string('code', 50);
@@ -51,6 +54,12 @@ class CreateTripsTable extends Migration
 
             $table->text('ex_custom_things');
             $table->date('created_date');
+
+
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
+                ->onDelete('cascade');
         });
     }
 
