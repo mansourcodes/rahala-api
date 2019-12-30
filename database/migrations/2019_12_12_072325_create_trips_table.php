@@ -19,8 +19,8 @@ class CreateTripsTable extends Migration
 
             $table->integer('client_id')->unsigned();
 
-            $table->string('name', 100);
-            $table->string('cities', 200);
+            $table->string('name', 225);
+            $table->string('cities', 225);
             $table->text('desc');
             $table->text('trip_path');
             $table->string('code', 50);
