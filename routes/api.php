@@ -17,14 +17,17 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::group([
+Route::group(
+    [
+    'middleware' => ['cors'],
     'prefix' => 'auth'
-], function () {
+],
+    function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
 
     Route::group([
-        'middleware' => 'auth:api'
+        'middleware' => ['auth:api']
     ], function () {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
@@ -32,7 +35,7 @@ Route::group([
 });
 
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::resource('clients', 'ClientController')->only([
         'index', 'show'
     ]);
