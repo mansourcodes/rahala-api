@@ -19,28 +19,29 @@ use Illuminate\Http\Request;
 
 Route::group(
     [
-    'middleware' => ['cors'],
-    'prefix' => 'auth'
-],
+        'prefix' => 'auth'
+    ],
     function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup');
+        Route::post('login', 'AuthController@login');
+        Route::post('signup', 'AuthController@signup');
 
-    Route::group([
-        'middleware' => ['auth:api']
-    ], function () {
-        Route::get('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
+        Route::group([
+            'middleware' => 'auth:api'
+        ], function () {
+            Route::get('logout', 'AuthController@logout');
+            Route::get('user', 'AuthController@user');
+        });
     });
-});
 
 
-Route::group(['middleware' => ['auth:api', 'cors']], function () {
-    Route::resource('clients', 'ClientController')->only([
-        'index', 'show'
-    ]);
+Route::group(
+    ['middleware' => 'auth:api'],
+    function () {
+        Route::resource('clients', 'ClientController')->only([
+            'index', 'show'
+        ]);
 
-    Route::resource('trips', 'TripController')->only([
-        'index', 'show'
-    ]);
-});
+        Route::resource('trips', 'TripController')->only([
+            'index', 'show'
+        ]);
+    });
