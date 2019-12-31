@@ -30,9 +30,14 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed'
         ]);
 
+        $errors = $validator->errors()->all();
+        if($errors[0] == 'The email has already been taken.' && count($errors) == 1){
+            return $this->login($request);
+        }
+
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Validation fail!'
+                'message' => implode('',$errors)
             ], 401);
         }
 
