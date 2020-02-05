@@ -30,10 +30,10 @@ class TripController extends Controller
             $tripQuery->where('cities', 'like', '%'.$request->get('cities').'%');
         }
         if ($request->has('food_options')) {
-            $tripQuery->where('food_options', 'like', $request->get('food_options'));
+            $tripQuery->where('food_options', '=', $request->get('food_options'));
         }
 
-        //rage filter
+        //range filters
         if ($request->has('travel_date')) {
             $tripQuery->whereBetween('travel_date', explode(',',$request->get('travel_date')));
         }
@@ -44,7 +44,7 @@ class TripController extends Controller
             $tripQuery->whereBetween('return_date', explode(',',$request->get('return_date')));
         }
 
-        //client filter
+        //client filters
         if ($request->has('client_id')) {
             $tripQuery->whereHas('client', function ($q) use ($request) {
                 return $q->where('id', '=', $request->get('client_id'));
