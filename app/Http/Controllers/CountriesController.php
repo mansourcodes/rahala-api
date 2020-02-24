@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
-use App\Http\Resources\ClientResource;
-use App\Http\Resources\ClientResourceCollection;
+use App\Http\Resources\CountryResource;
+use App\Http\Resources\CountryResourceCollection;
+use App\Country;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class CountriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +16,21 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-
-        $clientQuery = Client::query();
+        $countryQuery = Country::query();
 
         $sort = explode(':', $request->get('sort', 'id:desc'));
-        $clientQuery->orderBy($sort[0], $sort[1]);
+        $countryQuery->orderBy($sort[0], $sort[1]);
 
+        // filters
+        if ($request->has('name')) {
+            $countryQuery
+                ->where('en_name', 'like', '%' . $request->get('name') . '%')
+                ->orWhere('ar_name', 'like', '%' . $request->get('name') . '%');
+        }
 
         // end of filters
-        $clients = $clientQuery->paginate();
-        return new ClientResourceCollection($clients);
+        $countrys = $countryQuery->paginate();
+        return new CountryResourceCollection($countrys);
     }
 
     /**
@@ -52,22 +57,21 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Country $country)
     {
-        $client = Client::findOrFail($id);
-        return new ClientResource($client);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Country $country)
     {
         //
     }
@@ -76,10 +80,10 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Country $country)
     {
         //
     }
@@ -87,10 +91,10 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Country $country)
     {
         //
     }

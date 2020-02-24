@@ -31,7 +31,8 @@ Route::group(
             Route::get('logout', 'AuthController@logout');
             Route::get('user', 'AuthController@user');
         });
-    });
+    }
+);
 
 
 Route::group(
@@ -44,4 +45,9 @@ Route::group(
         Route::resource('trips', 'TripController')->only([
             'index', 'show'
         ]);
-    });
+
+        Route::resource('countries', 'CountriesController')->only([
+            'index', 'show'
+        ]);
+    }
+);

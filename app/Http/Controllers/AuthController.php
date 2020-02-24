@@ -31,13 +31,15 @@ class AuthController extends Controller
         ]);
 
         $errors = $validator->errors()->all();
-        if($errors[0] == 'The email has already been taken.' && count($errors) == 1){
-            return $this->login($request);
+        if (isset($errors[0])) {
+            if ($errors[0] == 'The email has already been taken.' && count($errors) == 1) {
+                return $this->login($request);
+            }
         }
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => implode('',$errors)
+                'message' => implode('', $errors)
             ], 401);
         }
 
