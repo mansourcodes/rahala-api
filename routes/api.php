@@ -53,5 +53,10 @@ Route::group(
         Route::resource('airlines', 'AirlinesController')->only([
             'index', 'show'
         ]);
+
+
+        Route::resource('cities', 'CitiesController')->only([
+            'index', 'show'
+        ]);
     }
 );
