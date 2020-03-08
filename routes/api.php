@@ -54,7 +54,6 @@ Route::group(
             'index', 'show'
         ]);
 
-
         Route::resource('cities', 'CitiesController')->only([
             'index', 'show'
         ]);

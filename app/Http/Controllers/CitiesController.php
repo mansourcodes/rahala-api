@@ -24,8 +24,13 @@ class CitiesController extends Controller
         // filters
         if ($request->has('name')) {
             $cityQuery
-                ->where('en_name', 'like', '%' . $request->get('name') . '%')
+                ->where('name', 'like', '%' . $request->get('name') . '%')
                 ->orWhere('ar_name', 'like', '%' . $request->get('name') . '%');
+        }
+
+        if ($request->has('country_code')) {
+            $cityQuery
+                ->where('country_code', 'like', '%' . $request->get('country_code') . '%');
         }
 
         // end of filters
