@@ -3,9 +3,12 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Trip;
-use App\City;
-use App\Airline;
+use App\Client;
 use Faker\Generator as Faker;
+
+
+
+
 
 $factory->define(Trip::class, function (Faker $faker) {
 
@@ -18,21 +21,19 @@ $factory->define(Trip::class, function (Faker $faker) {
 
     $age_range = ['adult', 'teen', 'boy', 'baby', 'infant'];
 
-    $random_cities = City::inRandomOrder()->limit(5)->lists('ar_name');
-    $random_airlines = Airline::inRandomOrder()->limit(5)->lists('code');
-
+    $random_clients = Client::all()->pluck('id')->toArray();
 
     return [
-        'client_id' => rand(1, 5),
-        'name' => $faker->sentence(7) . $faker->date('d/m/Y'),
-        'cities' => $faker->randomElement($random_cities) . ',' . $faker->randomElement($random_cities),
-        'desc' => $faker->paragraph,
-
-        'airlines' => $faker->randomElement($random_airlines),
-        'trip_path' => '{}',
+        'client_id' => $faker->randomElement($random_clients),
 
         'code' => 'R' . $code,
+        'name' => $faker->sentence(7) . $faker->date('d/m/Y'),
+        'cities' => $faker->randomElement($GLOBALS["random_cities"]) . ',' . $faker->randomElement($GLOBALS["random_cities"]),
+        'desc' => $faker->paragraph,
+
         'travel_by' => $travel_by,
+        'airlines' => $faker->randomElement($GLOBALS["random_airlines"]),
+        'hotels' => '5 Stars Hotel',
 
         'travel_date' => $faker->date(),
         'num_of_days' => rand(3, 20),
@@ -62,5 +63,8 @@ $factory->define(Trip::class, function (Faker $faker) {
 
         'ex_custom_things' => '{}',
         'created_date' => $faker->dateTime,
+
+        'trip_path' => '{}',
+
     ];
 });

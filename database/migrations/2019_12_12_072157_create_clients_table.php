@@ -19,11 +19,14 @@ class CreateClientsTable extends Migration
 
 
             $table->string('client_name', 100);
-            $table->string('client_alian', 100)->unique();
             $table->mediumText('logo_img');
-            $table->bigInteger('contact_wp_1');
-            $table->bigInteger('contact_wp_2');
-            $table->string('locations',100);
+            $table->json('contact');
+
+            $table->string('client_alian', 100)->unique();
+            $table->string('db_name', 50);
+            $table->string('db_user', 50);
+            $table->string('db_pass', 50);
+            $table->string('db_host', 50);
         });
     }
 

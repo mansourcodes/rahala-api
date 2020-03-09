@@ -47,7 +47,7 @@ Route::group(
         ]);
 
         Route::resource('countries', 'CountriesController')->only([
-            'index', 'show'
+            'index'
         ]);
 
         Route::resource('airlines', 'AirlinesController')->only([
@@ -55,7 +55,11 @@ Route::group(
         ]);
 
         Route::resource('cities', 'CitiesController')->only([
-            'index', 'show'
+            'index'
+        ]);
+
+        Route::resource('quicksearchs', 'QuicksearchController')->only([
+            'index'
         ]);
     }
 );

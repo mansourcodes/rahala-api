@@ -21,6 +21,7 @@ class AddCitiesData extends Migration
     {
 
         exec("C:\\xampp\mysql\bin\mysql -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database\factories\cities.sql'));
+        exec("mysql -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database\factories\cities.sql'));
 
         DB::update('update cities set ar_name = name');
         Schema::table('cities', function ($table) {

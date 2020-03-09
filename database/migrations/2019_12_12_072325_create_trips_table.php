@@ -26,6 +26,8 @@ class CreateTripsTable extends Migration
             $table->string('code', 50);
 
             $table->string('travel_by', 50);
+            $table->string('airlines', 50);
+            $table->string('hotels', 100);
 
             $table->date('travel_date');
             $table->integer('num_of_days');

@@ -5,11 +5,7 @@
 use App\Client;
 use Faker\Generator as Faker;
 
-// website http://placekitten.com/ is down
-$fakerfactory = \Faker\Factory::create();
-$face_img = $fakerfactory->image('public/storage/images', 200, 200, 'people', false);
-error_log('img url : ' . $face_img);
-dd();
+
 $factory->define(Client::class, function (Faker $faker) {
 
     $contact_object = [
@@ -60,14 +56,11 @@ $factory->define(Client::class, function (Faker $faker) {
         ],
     ];
 
-    global $face_img;
-
-    error_log('img url : ' . $face_img);
 
     return [
         'client_name' => $faker->firstNameMale . ' Travel',
         'client_alian' => strtolower($faker->firstNameMale . '_Travel'),
-        'logo_img' => $face_img,
+        'logo_img' => 'https://i.picsum.photos/200/200.jpg',
         'contact' => json_encode($contact_object),
         'db_name' => '',
         'db_user' => '',
