@@ -20,8 +20,20 @@ class AddCitiesData extends Migration
     public function up()
     {
 
-        exec("C:\\xampp\mysql\bin\mysql -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database\factories\cities.sql'));
-        exec("mysql -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database\factories\cities.sql'));
+        var_dump(PHP_OS);
+
+        if(PHP_OS == "Windows" || PHP_OS == "WINNT" ){
+            exec("C:\\xampp\mysql\bin\mysql -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database'.DIRECTORY_SEPARATOR.'factories'.DIRECTORY_SEPARATOR.'cities.sql'));
+
+        }else if(PHP_OS == "Darwin"){
+            exec("/Applications/XAMPP/xamppfiles/bin/mysql  -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database'.DIRECTORY_SEPARATOR.'factories'.DIRECTORY_SEPARATOR.'cities.sql'));
+
+        }else{
+            exec("mysql -u " . env('DB_USERNAME') . " -p" . env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . base_path('database'.DIRECTORY_SEPARATOR.'factories'.DIRECTORY_SEPARATOR.'cities.sql'));
+
+        }
+
+
 
         DB::update('update cities set ar_name = name');
         Schema::table('cities', function ($table) {

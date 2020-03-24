@@ -62,9 +62,9 @@ $factory->define(Client::class, function (Faker $faker) {
         'client_alian' => strtolower($faker->firstNameMale . '_Travel'),
         'logo_img' => 'https://i.picsum.photos/200/200.jpg',
         'contact' => json_encode($contact_object),
-        'db_name' => '',
-        'db_user' => '',
-        'db_pass' => '',
-        'db_host' => ''
+        'db_name' => 'a',
+        'db_user' => 'a',
+        'db_pass' => 'a',
+        'db_host' => 'a'
     ];
 });

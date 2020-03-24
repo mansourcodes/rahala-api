@@ -14,7 +14,7 @@ class AddAirlinesData extends Migration
      */
     public function up()
     {
-        DB::unprepared(file_get_contents(base_path('database\factories\airlines.sql')));
+        DB::unprepared(file_get_contents(base_path('database'.DIRECTORY_SEPARATOR.'factories'.DIRECTORY_SEPARATOR.'airlines.sql')));
     }
 
     /**

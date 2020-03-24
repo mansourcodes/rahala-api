@@ -15,7 +15,7 @@ class AddCountriesData extends Migration
      */
     public function up()
     {
-        DB::unprepared(file_get_contents(base_path('database\factories\countries.sql')));
+        DB::unprepared(file_get_contents(base_path('database'.DIRECTORY_SEPARATOR.'factories'.DIRECTORY_SEPARATOR.'countries.sql')));
     }
 
     /**

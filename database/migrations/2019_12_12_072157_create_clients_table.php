@@ -20,7 +20,7 @@ class CreateClientsTable extends Migration
 
             $table->string('client_name', 100);
             $table->mediumText('logo_img');
-            $table->json('contact');
+            $table->longText('contact');
 
             $table->string('client_alian', 100)->unique();
             $table->string('db_name', 50);
